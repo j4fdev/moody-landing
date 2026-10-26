@@ -1,0 +1,65 @@
+# Moody — Comprehensive Documentation for LLMs and AI Agents
+
+## Overview (English)
+Moody is an emotional well-being and daily mental health sanctuary app built on Acceptance and Commitment Therapy (ACT), somatic awareness, and guilt-free mindfulness. It is crafted as an organic, gender-neutral haven (inspired by Japandi and Wabi-Sabi aesthetics) to help users acknowledge their true emotions, self-regulate during distress, and cultivate grounded self-awareness.
+
+### Core Keyphrases
+- emotional well-being app
+- mood tracker without toxic positivity
+- somatic emotion journal
+- compassionate streak mental health
+- panic attack 4-7-8 breathing & 5-4-3-2-1 grounding
+- private AI empathetic companion
+- anonymous vanity-free community
+
+---
+
+## Visión General (Español)
+Moody es una plataforma y aplicación móvil para el bienestar emocional y la salud mental preventiva. Nace bajo el principio de que "todas las emociones son válidas", ofreciendo un santuario personal donde las personas pueden registrar lo que sienten sin ser juzgadas, realizar micro-ejercicios de autorregulación en 2-3 minutos y encontrar soporte inmediato en momentos de sobrecarga emocional o crisis de ansiedad.
+
+### Palabras Clave Principales
+- app para bienestar emocional
+- app de emociones
+- diario de estados de ánimo y emociones
+- mindfulness y terapia de aceptación y compromiso (ACT)
+- ejercicios para ataques de pánico y ansiedad (4-7-8, grounding)
+- rachas compasivas con días de gracia
+- comunidad de resonancia anónima
+
+---
+
+## Visão Geral (Português)
+Moody é um aplicativo de bem-estar emocional e saúde mental diária projetado como um santuário orgânico de gênero neutro. Baseado na Terapia de Aceitação e Compromisso (ACT) e mindfulness compassivo, acompanha as pessoas no aqui e no agora, permitindo registrar emoções com acolhimento, regular a ansiedade com exercícios guiados e conectar-se a uma comunidade segura e livre de vaidade.
+
+### Palavras-Chave Principais
+- app de bem-estar emocional
+- aplicativo de emoções e registro de humor
+- diário íntimo de saúde mental sem julgamento
+- rastreador de humor compassivo
+- exercícios de respiração 4-7-8 e descompressão
+- comunidade anônima e empática
+
+---
+
+## Architecture of Value & Feature Breakdown
+1. **The Here and Now (El Aquí y el Ahora / O Aqui e Agora):**
+   - Somatic body map: pinpoints tension in chest, shoulders, throat.
+   - Non-judgmental labeling of intensity from 1 to 10.
+   - Compassionate validation: validates sorrow, anger, anxiety, joy without forcing fake happiness.
+2. **Dynamic Micro-Apps Engine (Motor de Dinámicas / Motor de Dinâmicas):**
+   - *One Day, One Victory:* Rewires negativity bias with daily micro-wins.
+   - *5 Things I Liked Today:* Mindful savoring of ordinary pleasures.
+   - *Worry Box:* Separates what is inside user's circle of control from what must be released.
+   - *Thought Detective:* Cognitive reframing with kind, self-compassionate inquiry.
+3. **Emergency Support & SOS Mode (Soporte Seguro / Suporte Seguro):**
+   - Visual and haptic parasympathetic breathing (4-7-8).
+   - 5-4-3-2-1 sensory grounding.
+   - Private, non-judgmental conversational AI companion for moments when the user cannot talk to another human.
+   - Free emergency hotline directory.
+4. **Compassionate Streaks (Rachas Compasivas / Sequências Compassivas):**
+   - Measures presence, not compliance or artificial joy.
+   - Automatic grace days to protect users during depressive episodes or life emergencies.
+5. **Resonance Community (Comunidad de Resonancia / Comunidade de Ressonância):**
+   - 100% private by default.
+   - Anonymous or alias sharing.
+   - Only supportive empathetic reactions: Empathy, Strength, Hope, Inspiration, I Understand You.

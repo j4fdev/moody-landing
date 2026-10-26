@@ -1,0 +1,134 @@
+export type Locale = "es" | "en" | "pt";
+
+export interface Translations {
+  meta: {
+    title: string;
+    description: string;
+    keywords: string;
+  };
+  nav: {
+    brandSubtitle: string;
+    tabFeatures: string;
+    tabWaitlist: string;
+    terms: string;
+    privacy: string;
+    themeToggleLight: string;
+    themeToggleDark: string;
+    joinWaitlistBtn: string;
+  };
+  hero: {
+    badge: string;
+    titleStart: string;
+    titleHighlight: string;
+    titleEnd: string;
+    subtitle: string;
+    ctaPrimary: string;
+    ctaSecondary: string;
+    statUsersWaiting: string;
+    statRating: string;
+    statNoAds: string;
+  };
+  features: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    interactiveDemoTitle: string;
+    interactiveDemoSubtitle: string;
+    breathePromptInhale: string;
+    breathePromptHold: string;
+    breathePromptExhale: string;
+    breathePromptRest: string;
+    breatheButtonStart: string;
+    breatheButtonStop: string;
+    p1Title: string;
+    p1Desc: string;
+    p1Tag: string;
+    p2Title: string;
+    p2Desc: string;
+    p2Tag: string;
+    p3Title: string;
+    p3Desc: string;
+    p3Tag: string;
+    p4Title: string;
+    p4Desc: string;
+    p4Tag: string;
+    p5Title: string;
+    p5Desc: string;
+    p5Tag: string;
+    reactionsTitle: string;
+    reactionsSubtitle: string;
+    reactionEmpathy: string;
+    reactionStrength: string;
+    reactionHope: string;
+    reactionInspiration: string;
+    reactionUnderstood: string;
+    roadmapTitle: string;
+    roadmapSubtitle: string;
+    roadmapFilterAll: string;
+    roadmapFilterPlanned: string;
+    roadmapFilterInProgress: string;
+    roadmapFilterShipped: string;
+    roadmapVoteBtn: string;
+    roadmapVotedBtn: string;
+    roadmapProposeBtn: string;
+    roadmapProposePlaceholder: string;
+    roadmapProposeSubmit: string;
+    roadmapProposeSuccess: string;
+  };
+  waitlist: {
+    badge: string;
+    title: string;
+    subtitle: string;
+    nameLabel: string;
+    namePlaceholder: string;
+    emailLabel: string;
+    emailPlaceholder: string;
+    sourceLabel: string;
+    sourceOptions: {
+      social: string;
+      recommendation: string;
+      search: string;
+      other: string;
+    };
+    submitBtn: string;
+    submittingBtn: string;
+    privacyNotice: string;
+    successTitle: string;
+    successSubtitle: string;
+    positionLabel: string;
+    referralTitle: string;
+    referralExplanation: string;
+    copyLinkBtn: string;
+    copiedLinkBtn: string;
+    shareTwitter: string;
+    shareWhatsapp: string;
+    joinAnotherBtn: string;
+    counterText: string;
+  };
+  crisis: {
+    bannerTitle: string;
+    bannerText: string;
+    bannerAction: string;
+    modalTitle: string;
+    modalIntro: string;
+    modalClose: string;
+    countries: Array<{
+      country: string;
+      number: string;
+      desc: string;
+    }>;
+  };
+  legal: {
+    termsTitle: string;
+    privacyTitle: string;
+    lastUpdated: string;
+    closeModal: string;
+    readFullPage: string;
+  };
+  footer: {
+    tagline: string;
+    rights: string;
+    designedWith: string;
+    genderNeutral: string;
+  };
+}
