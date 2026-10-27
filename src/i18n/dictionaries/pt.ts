@@ -76,6 +76,11 @@ export const pt: Translations = {
     roadmapProposeSuccess: "Obrigado! Sua sugestão foi enviada para análise.",
     roadmapEmptyTitle: "Seja o primeiro a propor um recurso",
     roadmapEmptySubtitle: "O roadmap da comunidade está aberto. Diga-nos qual ferramenta de bem-estar você gostaria de ver no Moody.",
+    roadmapProposeModalSubtitle: "Sua ideia será conectada diretamente ao LandingJ4F e visível para a comunidade.",
+    roadmapProposeFieldTitle: "Título do recurso",
+    roadmapProposeFieldDetails: "Por que isso ajudaria no seu bem-estar? (Opcional)",
+    roadmapProposeFieldDetailsPlaceholder: "Descreva brevemente como você gostaria de usá-la...",
+    roadmapProposeCancel: "Cancelar",
   },
   waitlist: {
     badge: "Acesso Antecipado Exclusivo",

@@ -76,6 +76,11 @@ export interface Translations {
     roadmapProposeSuccess: string;
     roadmapEmptyTitle: string;
     roadmapEmptySubtitle: string;
+    roadmapProposeModalSubtitle: string;
+    roadmapProposeFieldTitle: string;
+    roadmapProposeFieldDetails: string;
+    roadmapProposeFieldDetailsPlaceholder: string;
+    roadmapProposeCancel: string;
   };
   waitlist: {
     badge: string;

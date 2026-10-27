@@ -33,6 +33,18 @@ export default function Hero({ onTabChange, activeTab, onOpenWaitlistModal }: He
       .catch(() => {});
   }, []);
 
+  const handleScrollToFeatures = () => {
+    if (activeTab !== "features") {
+      onTabChange("features");
+    }
+    setTimeout(() => {
+      const el = document.getElementById("features-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 60);
+  };
+
   return (
     <section className="relative overflow-hidden pt-8 pb-10 md:pt-12 md:pb-14">
       {/* Background Calm Gradients */}
@@ -72,7 +84,7 @@ export default function Hero({ onTabChange, activeTab, onOpenWaitlistModal }: He
             </button>
 
             <button
-              onClick={() => onTabChange("features")}
+              onClick={handleScrollToFeatures}
               className={`w-full sm:w-auto px-6 py-3.5 rounded-2xl font-bold text-xs sm:text-sm transition-all border ${
                 activeTab === "features"
                   ? "bg-moody-surfaceContainer dark:bg-moody-surfaceContainerDark border-moody-primary text-moody-primary dark:text-moody-primaryDark"

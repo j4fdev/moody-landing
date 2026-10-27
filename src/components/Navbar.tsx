@@ -58,12 +58,25 @@ export default function Navbar({
     setLocale(loc);
   };
 
+  const handleFeaturesClick = () => {
+    onTabChange("features");
+    setTimeout(() => {
+      const el = document.getElementById("features-section");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      }
+    }, 60);
+  };
+
   return (
     <header className="sticky top-0 z-40 w-full backdrop-blur-md bg-moody-surface/85 dark:bg-moody-surfaceDark/85 border-b border-moody-oat/70 dark:border-moody-surfaceContainerDark transition-colors">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between gap-4">
         {/* Brand / Logo */}
         <div
-          onClick={() => onTabChange("features")}
+          onClick={() => {
+            onTabChange("features");
+            window.scrollTo({ top: 0, behavior: "smooth" });
+          }}
           className="flex items-center gap-3 cursor-pointer group select-none"
         >
           <div className="w-10 h-10 rounded-2xl bg-moody-primary flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-105">
@@ -85,7 +98,7 @@ export default function Navbar({
         {/* Desktop Tab Switcher (The 2 main tabs) */}
         <div className="hidden md:flex items-center p-1.5 rounded-2xl bg-moody-surfaceContainer dark:bg-moody-surfaceContainerDark border border-moody-oat/70 dark:border-moody-surfaceHoverDark shadow-inner">
           <button
-            onClick={() => onTabChange("features")}
+            onClick={handleFeaturesClick}
             className={`flex items-center gap-2 px-5 py-2 rounded-xl text-xs font-bold transition-all ${
               activeTab === "features"
                 ? "bg-moody-surface dark:bg-moody-surfaceDark text-moody-primary dark:text-moody-primaryDark shadow-sm"

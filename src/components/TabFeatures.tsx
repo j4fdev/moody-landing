@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { useI18n } from "@/i18n/context";
 import BreathingWidget from "./BreathingWidget";
 import {
@@ -20,6 +21,7 @@ import {
   HandHeart,
   MessageCircleHeart,
   HelpCircle,
+  X,
 } from "lucide-react";
 import { FeatureItem } from "@/lib/landingClient";
 
@@ -30,7 +32,7 @@ interface TabFeaturesProps {
 export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
   const { t } = useI18n();
 
-  // Roadmap features state
+  const [mounted, setMounted] = useState(false);
   const [features, setFeatures] = useState<FeatureItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>("all");
@@ -48,6 +50,7 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
   const [somaticZone, setSomaticZone] = useState<string>("pecho");
 
   useEffect(() => {
+    setMounted(true);
     fetchFeatures();
   }, []);
 
@@ -152,7 +155,7 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
   return (
     <div className="space-y-12 md:space-y-16 py-4 animate-fade-in">
       {/* SECTION 1: THE 5 PILLARS (Compact & Balanced) */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section id="features-section" className="max-w-6xl mx-auto px-4 sm:px-6 scroll-mt-24">
         <div className="text-center max-w-xl mx-auto mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-moody-primary/10 dark:bg-moody-primaryDark/15 text-moody-primary dark:text-moody-primaryDark text-xs font-semibold mb-2">
             <Compass className="w-3.5 h-3.5" />
@@ -406,7 +409,7 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
       </section>
 
       {/* SECTION 3: REAL ROADMAP (LandingJ4F Backend Connection, Clean Empty State) */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6">
+      <section id="roadmap" className="max-w-6xl mx-auto px-4 sm:px-6 scroll-mt-24">
         <div className="p-6 md:p-10 rounded-3xl bg-moody-surfaceContainer dark:bg-moody-surfaceContainerDark border border-moody-oat/80 dark:border-moody-surfaceHoverDark shadow-sm">
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
@@ -522,26 +525,39 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
         </div>
       </section>
 
-      {/* Propose Feature Modal */}
-      {isProposing && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="relative w-full max-w-lg bg-moody-surface dark:bg-moody-surfaceDark rounded-3xl border border-moody-oat dark:border-moody-surfaceContainerDark shadow-2xl p-6 md:p-8">
-            <h3 className="text-lg font-bold text-moody-textPrimary dark:text-moody-textPrimaryDark mb-1">
-              {t.features.roadmapProposeBtn}
-            </h3>
-            <p className="text-xs text-moody-textSecondary dark:text-moody-textSecondaryDark mb-4">
-              Tu idea será revisada y conectada directamente a LandingJ4F.
+      {/* Propose Feature Modal (Rendered at Body level via Portal for perfect screen centering) */}
+      {isProposing && mounted && typeof document !== "undefined" && createPortal(
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/65 backdrop-blur-sm">
+          <div className="relative w-full max-w-lg bg-moody-surface dark:bg-moody-surfaceDark rounded-3xl border border-moody-oat dark:border-moody-surfaceContainerDark shadow-2xl p-6 md:p-8 animate-fade-in">
+            {/* Close Button */}
+            <button
+              onClick={() => setIsProposing(false)}
+              className="absolute top-5 right-5 p-2 rounded-full hover:bg-moody-surfaceContainer dark:hover:bg-moody-surfaceContainerDark text-moody-textSecondary dark:text-moody-textSecondaryDark transition-colors"
+              aria-label="Cerrar modal"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <div className="flex items-center gap-2 text-moody-primary dark:text-moody-primaryDark mb-1.5">
+              <Sparkles className="w-5 h-5" />
+              <h3 className="text-xl font-bold text-moody-textPrimary dark:text-moody-textPrimaryDark">
+                {t.features.roadmapProposeBtn}
+              </h3>
+            </div>
+
+            <p className="text-xs text-moody-textSecondary dark:text-moody-textSecondaryDark mb-5">
+              {t.features.roadmapProposeModalSubtitle}
             </p>
 
             {proposeSuccess ? (
-              <div className="p-5 rounded-xl bg-moody-primary/15 text-center text-moody-primary dark:text-moody-primaryDark font-bold text-xs">
+              <div className="p-6 rounded-2xl bg-moody-primary/15 text-center text-moody-primary dark:text-moody-primaryDark font-bold text-xs md:text-sm">
                 {t.features.roadmapProposeSuccess}
               </div>
             ) : (
-              <form onSubmit={handleProposeSubmit} className="space-y-3.5">
+              <form onSubmit={handleProposeSubmit} className="space-y-4">
                 <div>
                   <label className="block text-[11px] font-bold uppercase tracking-wider text-moody-textSecondary dark:text-moody-textSecondaryDark mb-1">
-                    Título de la función
+                    {t.features.roadmapProposeFieldTitle} <span className="text-moody-secondary">*</span>
                   </label>
                   <input
                     type="text"
@@ -555,13 +571,13 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
 
                 <div>
                   <label className="block text-[11px] font-bold uppercase tracking-wider text-moody-textSecondary dark:text-moody-textSecondaryDark mb-1">
-                    ¿Por qué te ayudaría en tu bienestar? (Opcional)
+                    {t.features.roadmapProposeFieldDetails}
                   </label>
                   <textarea
                     rows={3}
                     value={proposeDetails}
                     onChange={(e) => setProposeDetails(e.target.value)}
-                    placeholder="Describe brevemente cómo te gustaría usarla..."
+                    placeholder={t.features.roadmapProposeFieldDetailsPlaceholder}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-moody-surfaceContainer dark:bg-moody-surfaceContainerDark border border-moody-oat dark:border-moody-surfaceHoverDark text-xs text-moody-textPrimary dark:text-moody-textPrimaryDark focus:outline-none focus:border-moody-primary resize-none"
                   />
                 </div>
@@ -570,9 +586,9 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
                   <button
                     type="button"
                     onClick={() => setIsProposing(false)}
-                    className="px-3.5 py-2 rounded-lg font-medium text-xs text-moody-textSecondary hover:text-moody-textPrimary"
+                    className="px-4 py-2 rounded-xl font-medium text-xs text-moody-textSecondary hover:text-moody-textPrimary"
                   >
-                    Cancelar
+                    {t.features.roadmapProposeCancel}
                   </button>
                   <button
                     type="submit"
@@ -590,7 +606,8 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
               </form>
             )}
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );

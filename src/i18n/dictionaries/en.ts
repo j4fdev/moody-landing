@@ -76,6 +76,11 @@ export const en: Translations = {
     roadmapProposeSuccess: "Thank you! Your idea has been sent for review.",
     roadmapEmptyTitle: "Be the first to propose a feature",
     roadmapEmptySubtitle: "The community roadmap is live. Tell us what emotional well-being feature you'd love in Moody.",
+    roadmapProposeModalSubtitle: "Your idea will connect directly to LandingJ4F and be visible to the community.",
+    roadmapProposeFieldTitle: "Feature Title",
+    roadmapProposeFieldDetails: "Why would this support your well-being? (Optional)",
+    roadmapProposeFieldDetailsPlaceholder: "Briefly describe how you'd like to use it...",
+    roadmapProposeCancel: "Cancel",
   },
   waitlist: {
     badge: "Exclusive Early Access",
