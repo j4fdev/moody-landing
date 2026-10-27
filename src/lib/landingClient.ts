@@ -1,7 +1,18 @@
 // Client and Dual-Mode Proxy for LandingJ4F backend
-const API_BASE_URL = process.env.LANDING_API_BASE_URL || "http://localhost:8092";
-const API_KEY = process.env.LANDING_API_KEY || "";
-const PROJECT_SLUG = process.env.LANDING_PROJECT_SLUG || "moody";
+function normalizeApiBaseUrl(raw?: string): string {
+  let url = (raw || "https://landing-api.jffsolutions.com").trim();
+  if (!url.startsWith("http://") && !url.startsWith("https://")) {
+    url = `https://${url}`;
+  }
+  // Auto-correct common typo jffsolution.com -> jffsolutions.com
+  url = url.replace("landing-api.jffsolution.com", "landing-api.jffsolutions.com");
+  // Strip trailing slashes
+  return url.replace(/\/+$/, "");
+}
+
+const API_BASE_URL = normalizeApiBaseUrl(process.env.LANDING_API_BASE_URL);
+const API_KEY = (process.env.LANDING_API_KEY || "").trim();
+const PROJECT_SLUG = (process.env.LANDING_PROJECT_SLUG || "moody").trim();
 
 export interface PublicInfo {
   project: {
