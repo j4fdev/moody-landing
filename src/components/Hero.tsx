@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useI18n } from "@/i18n/context";
 import BotanicalBloom from "./BotanicalBloom";
+import { trackTelemetry } from "@/lib/telemetry";
 import {
   Sparkles,
   ArrowRight,
@@ -34,6 +35,7 @@ export default function Hero({ onTabChange, activeTab, onOpenWaitlistModal }: He
   }, []);
 
   const handleScrollToFeatures = () => {
+    trackTelemetry("cta_click", "#features-section");
     if (activeTab !== "features") {
       onTabChange("features");
     }

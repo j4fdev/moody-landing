@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useI18n } from "@/i18n/context";
+import { trackTelemetry } from "@/lib/telemetry";
 import confetti from "canvas-confetti";
 import {
   Sparkles,
@@ -76,6 +77,7 @@ export default function TabWaitlist({ onOpenLegal }: TabWaitlistProps) {
 
     setIsSubmitting(true);
     setErrorMsg(null);
+    trackTelemetry("cta_click", "#waitlist-form-submit");
 
     try {
       const res = await fetch("/api/waitlist", {

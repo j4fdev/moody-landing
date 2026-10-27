@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useI18n } from "@/i18n/context";
+import { trackTelemetry } from "@/lib/telemetry";
 import confetti from "canvas-confetti";
 import {
   X,
@@ -81,6 +82,7 @@ export default function WaitlistModal({ isOpen, onClose, onOpenLegal }: Waitlist
 
     setIsSubmitting(true);
     setErrorMsg(null);
+    trackTelemetry("cta_click", "#waitlist-modal-submit");
 
     try {
       const res = await fetch("/api/waitlist", {

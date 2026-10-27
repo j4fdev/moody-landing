@@ -44,17 +44,25 @@ export function trackTelemetry(type: "page_view" | "cta_click", path?: string) {
     utm: getUtmParams(),
   };
 
-  // Use sendBeacon for fire-and-forget or fetch fallback
-  const jsonStr = JSON.stringify(payload);
-  if (navigator.sendBeacon) {
-    const blob = new Blob([jsonStr], { type: "application/json" });
-    navigator.sendBeacon("/api/events", blob);
-  } else {
-    fetch("/api/events", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: jsonStr,
-      keepalive: true,
-    }).catch(() => {});
+  if (process.env.NODE_ENV !== "production") {
+    console.log("[Moody Telemetry Dispatched]", type, payload);
   }
+
+  // Reliable POST with keepalive: true to ensure visibility in DevTools Network tab
+  fetch("/api/events", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  })
+    .then((res) => {
+      if (process.env.NODE_ENV !== "production") {
+        console.log(`[Moody Telemetry Response] Status: ${res.status}`);
+      }
+    })
+    .catch((err) => {
+      if (process.env.NODE_ENV !== "production") {
+        console.warn("[Moody Telemetry Error]", err);
+      }
+    });
 }

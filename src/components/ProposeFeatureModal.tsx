@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { useI18n } from "@/i18n/context";
+import { trackTelemetry } from "@/lib/telemetry";
 import { X, Sparkles, Send, Loader2 } from "lucide-react";
 import { FeatureItem } from "@/lib/landingClient";
 
@@ -30,6 +31,7 @@ export default function ProposeFeatureModal({
     if (!title.trim()) return;
 
     setIsSubmitting(true);
+    trackTelemetry("cta_click", "#modal-propose-feature-submit");
     try {
       const res = await fetch("/api/features", {
         method: "POST",

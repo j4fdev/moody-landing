@@ -282,29 +282,39 @@ export interface TelemetryEventInput {
 }
 
 export async function recordTelemetryEvent(event: TelemetryEventInput): Promise<boolean> {
-  try {
-    const headers: Record<string, string> = { "Content-Type": "application/json" };
-    let url = `${API_BASE_URL}/p/${PROJECT_SLUG}/events`;
+  const tryPost = async (baseUrl: string): Promise<boolean> => {
+    try {
+      const headers: Record<string, string> = { "Content-Type": "application/json" };
+      let url = `${baseUrl}/p/${PROJECT_SLUG}/events`;
 
-    if (API_KEY) {
-      headers["X-API-Key"] = API_KEY;
-      url = `${API_BASE_URL}/api/public/v1/events`;
+      if (API_KEY) {
+        headers["X-API-Key"] = API_KEY;
+        url = `${baseUrl}/api/public/v1/events`;
+      }
+
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 2500);
+
+      const res = await fetch(url, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(event),
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
+
+      return res.status === 204 || res.ok;
+    } catch {
+      return false;
     }
+  };
 
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 2000);
-
-    const res = await fetch(url, {
-      method: "POST",
-      headers,
-      body: JSON.stringify(event),
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
-
-    return res.status === 204 || res.ok;
-  } catch {
-    // Fail silently in development/offline
-    return false;
+  let ok = await tryPost(API_BASE_URL);
+  if (!ok && API_BASE_URL.includes("8092")) {
+    ok = await tryPost(API_BASE_URL.replace("8092", "8080"));
+  } else if (!ok && API_BASE_URL.includes("8080")) {
+    ok = await tryPost(API_BASE_URL.replace("8080", "8092"));
   }
+
+  return ok;
 }

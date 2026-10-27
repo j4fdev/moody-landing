@@ -20,10 +20,20 @@ export async function POST(req: NextRequest) {
       utm: body.utm || {},
     };
 
-    await recordTelemetryEvent(eventPayload);
+    console.log(`[Telemetry API] Received event:`, eventPayload.type, eventPayload.path);
 
-    return new NextResponse(null, { status: 204 });
-  } catch {
-    return new NextResponse(null, { status: 204 });
+    const success = await recordTelemetryEvent(eventPayload);
+    console.log(`[Telemetry API] Upstream recorded:`, success);
+
+    return NextResponse.json(
+      { ok: true, status: "recorded", upstream: success },
+      { status: 200 }
+    );
+  } catch (err) {
+    console.error("[Telemetry API Error]", err);
+    return NextResponse.json(
+      { ok: false, error: "Failed to record event" },
+      { status: 500 }
+    );
   }
 }

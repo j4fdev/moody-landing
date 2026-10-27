@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { useI18n } from "@/i18n/context";
+import { trackTelemetry } from "@/lib/telemetry";
 import BreathingWidget from "./BreathingWidget";
 import {
   Compass,
@@ -72,6 +73,7 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
   const handleVote = async (id: string) => {
     if (votingId) return;
     setVotingId(id);
+    trackTelemetry("cta_click", `#vote-${id}`);
     try {
       const res = await fetch(`/api/features/${id}/vote`, { method: "POST" });
       if (res.ok) {
@@ -94,6 +96,7 @@ export default function TabFeatures({ onOpenWaitlistModal }: TabFeaturesProps) {
     if (!proposeTitle.trim()) return;
 
     setIsSubmittingPropose(true);
+    trackTelemetry("cta_click", "#propose-feature-submit");
     try {
       const res = await fetch("/api/features", {
         method: "POST",
