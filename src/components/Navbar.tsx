@@ -19,9 +19,15 @@ interface NavbarProps {
   activeTab: "features" | "waitlist";
   onTabChange: (tab: "features" | "waitlist") => void;
   onOpenCrisis: () => void;
+  onOpenWaitlistModal: () => void;
 }
 
-export default function Navbar({ activeTab, onTabChange, onOpenCrisis }: NavbarProps) {
+export default function Navbar({
+  activeTab,
+  onTabChange,
+  onOpenCrisis,
+  onOpenWaitlistModal,
+}: NavbarProps) {
   const { locale, setLocale, t } = useI18n();
   const [isDark, setIsDark] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -140,15 +146,13 @@ export default function Navbar({ activeTab, onTabChange, onOpenCrisis }: NavbarP
             <span className="hidden lg:inline text-[11px]">SOS</span>
           </button>
 
-          {/* CTA Button */}
-          {activeTab !== "waitlist" && (
-            <button
-              onClick={() => onTabChange("waitlist")}
-              className="px-4 py-2 rounded-xl bg-moody-primary text-white text-xs font-bold hover:bg-moody-primaryHover transition-all shadow-sm active:scale-95"
-            >
-              {t.nav.joinWaitlistBtn}
-            </button>
-          )}
+          {/* CTA Button - Opens Waitlist Popup Directly */}
+          <button
+            onClick={onOpenWaitlistModal}
+            className="px-4 py-2 rounded-xl bg-moody-primary text-white text-xs font-bold hover:bg-moody-primaryHover transition-all shadow-sm active:scale-95"
+          >
+            {t.nav.joinWaitlistBtn}
+          </button>
         </div>
 
         {/* Mobile Hamburger */}

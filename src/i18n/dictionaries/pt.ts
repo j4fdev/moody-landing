@@ -74,6 +74,8 @@ export const pt: Translations = {
     roadmapProposePlaceholder: "Ex: Paisagens sonoras binaurais da natureza para dormir...",
     roadmapProposeSubmit: "Enviar Proposta",
     roadmapProposeSuccess: "Obrigado! Sua sugestão foi enviada para análise.",
+    roadmapEmptyTitle: "Seja o primeiro a propor um recurso",
+    roadmapEmptySubtitle: "O roadmap da comunidade está aberto. Diga-nos qual ferramenta de bem-estar você gostaria de ver no Moody.",
   },
   waitlist: {
     badge: "Acesso Antecipado Exclusivo",
@@ -90,6 +92,10 @@ export const pt: Translations = {
       search: "Pesquisando apps de bem-estar e emoções",
       other: "Outro lugar",
     },
+    acceptTermsLabel: "Li e aceito os",
+    termsLinkText: "Termos e Condições",
+    privacyLinkText: "Política de Privacidade",
+    acceptTermsError: "Você precisa aceitar os Termos e a Política de Privacidade para continuar.",
     submitBtn: "Entrar na Lista de Espera",
     submittingBtn: "Garantindo seu lugar...",
     privacyNotice: "Respeitamos sua privacidade. Zero spam, dados criptografados e cancelamento em um clique.",
@@ -104,6 +110,7 @@ export const pt: Translations = {
     shareWhatsapp: "Enviar pelo WhatsApp",
     joinAnotherBtn: "Cadastrar outro e-mail",
     counterText: "pessoas já entraram no santuário até agora",
+    counterZero: "Seja o primeiro pioneiro a entrar no santuário!",
   },
   crisis: {
     bannerTitle: "Precisa de apoio imediato em crise?",

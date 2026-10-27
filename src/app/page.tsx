@@ -8,10 +8,12 @@ import TabWaitlist from "@/components/TabWaitlist";
 import Footer from "@/components/Footer";
 import CrisisModal from "@/components/CrisisModal";
 import LegalModal from "@/components/LegalModal";
+import WaitlistModal from "@/components/WaitlistModal";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"features" | "waitlist">("features");
   const [crisisOpen, setCrisisOpen] = useState(false);
+  const [waitlistModalOpen, setWaitlistModalOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState<"terms" | "privacy" | null>(null);
 
   // Sync tab with URL hash if present (#waitlist or #features)
@@ -43,17 +45,22 @@ export default function Home() {
           activeTab={activeTab}
           onTabChange={handleTabChange}
           onOpenCrisis={() => setCrisisOpen(true)}
+          onOpenWaitlistModal={() => setWaitlistModalOpen(true)}
         />
 
         {/* Hero Section */}
-        <Hero activeTab={activeTab} onTabChange={handleTabChange} />
+        <Hero
+          activeTab={activeTab}
+          onTabChange={handleTabChange}
+          onOpenWaitlistModal={() => setWaitlistModalOpen(true)}
+        />
 
         {/* Main Interactive Tab Content */}
         <main className="transition-all">
           {activeTab === "features" ? (
-            <TabFeatures />
+            <TabFeatures onOpenWaitlistModal={() => setWaitlistModalOpen(true)} />
           ) : (
-            <TabWaitlist />
+            <TabWaitlist onOpenLegal={(type) => setLegalModalType(type)} />
           )}
         </main>
       </div>
@@ -69,6 +76,11 @@ export default function Home() {
       <LegalModal
         type={legalModalType}
         onClose={() => setLegalModalType(null)}
+      />
+      <WaitlistModal
+        isOpen={waitlistModalOpen}
+        onClose={() => setWaitlistModalOpen(false)}
+        onOpenLegal={(type) => setLegalModalType(type)}
       />
     </div>
   );

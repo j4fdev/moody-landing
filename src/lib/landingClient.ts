@@ -31,52 +31,11 @@ export interface WaitlistJoinResponse {
   already_joined: boolean;
 }
 
-// Fallback in-memory state for development / local offline mode
-let fallbackWaitlistCount = 142;
+// Fallback in-memory state for development / local offline mode (starts clean with real data)
+let fallbackWaitlistCount = 0;
 const fallbackWaitlistUsers = new Map<string, { position: number; referral_code: string }>();
 
-const fallbackFeatures: FeatureItem[] = [
-  {
-    id: "feat-1",
-    title: "Paisajes sonoros binaurales y lluvia en bosque nórdico para dormir",
-    status: "in_progress",
-    votes: 89,
-    has_voted: false,
-    created_at: "2026-10-20T10:00:00Z",
-  },
-  {
-    id: "feat-2",
-    title: "Widgets de respiración rápida 4-7-8 para pantalla de bloqueo (iOS y Android)",
-    status: "planned",
-    votes: 74,
-    has_voted: false,
-    created_at: "2026-10-21T12:00:00Z",
-  },
-  {
-    id: "feat-3",
-    title: "Exportación cifrada de reflexiones a PDF y Markdown personal",
-    status: "planned",
-    votes: 56,
-    has_voted: false,
-    created_at: "2026-10-22T15:30:00Z",
-  },
-  {
-    id: "feat-4",
-    title: "Integración con anillos y relojes inteligentes para alertar picos de estrés somático",
-    status: "proposed",
-    votes: 43,
-    has_voted: false,
-    created_at: "2026-10-23T09:15:00Z",
-  },
-  {
-    id: "feat-5",
-    title: "Caja de Preocupaciones interactiva con ritual de desprendimiento",
-    status: "shipped",
-    votes: 112,
-    has_voted: false,
-    created_at: "2026-10-18T08:00:00Z",
-  },
-];
+const fallbackFeatures: FeatureItem[] = [];
 
 export async function fetchProjectInfo(): Promise<PublicInfo> {
   try {

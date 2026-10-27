@@ -74,6 +74,8 @@ export const en: Translations = {
     roadmapProposePlaceholder: "e.g., Binaural nature soundscapes for sleep...",
     roadmapProposeSubmit: "Submit Proposal",
     roadmapProposeSuccess: "Thank you! Your idea has been sent for review.",
+    roadmapEmptyTitle: "Be the first to propose a feature",
+    roadmapEmptySubtitle: "The community roadmap is live. Tell us what emotional well-being feature you'd love in Moody.",
   },
   waitlist: {
     badge: "Exclusive Early Access",
@@ -90,6 +92,10 @@ export const en: Translations = {
       search: "Searching for well-being & mood apps",
       other: "Somewhere else",
     },
+    acceptTermsLabel: "I have read and agree to the",
+    termsLinkText: "Terms and Conditions",
+    privacyLinkText: "Privacy Policy",
+    acceptTermsError: "You must accept the Terms and Privacy Policy to continue.",
     submitBtn: "Join the Waitlist",
     submittingBtn: "Reserving your spot...",
     privacyNotice: "We honor your privacy. Zero spam, encrypted storage, and one-click unsubscribe.",
@@ -104,6 +110,7 @@ export const en: Translations = {
     shareWhatsapp: "Send via WhatsApp",
     joinAnotherBtn: "Sign up another email",
     counterText: "people have joined the sanctuary so far",
+    counterZero: "Be the first pioneer to step into the sanctuary!",
   },
   crisis: {
     bannerTitle: "Need immediate crisis support?",

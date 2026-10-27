@@ -74,6 +74,8 @@ export interface Translations {
     roadmapProposePlaceholder: string;
     roadmapProposeSubmit: string;
     roadmapProposeSuccess: string;
+    roadmapEmptyTitle: string;
+    roadmapEmptySubtitle: string;
   };
   waitlist: {
     badge: string;
@@ -90,6 +92,10 @@ export interface Translations {
       search: string;
       other: string;
     };
+    acceptTermsLabel: string;
+    termsLinkText: string;
+    privacyLinkText: string;
+    acceptTermsError: string;
     submitBtn: string;
     submittingBtn: string;
     privacyNotice: string;
@@ -104,6 +110,7 @@ export interface Translations {
     shareWhatsapp: string;
     joinAnotherBtn: string;
     counterText: string;
+    counterZero: string;
   };
   crisis: {
     bannerTitle: string;
