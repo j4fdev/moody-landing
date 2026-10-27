@@ -271,3 +271,40 @@ export async function createFeatureRemote(title: string, body?: string, visitorI
   fallbackFeatures.unshift(newFeat);
   return newFeat;
 }
+
+export interface TelemetryEventInput {
+  type: "page_view" | "cta_click";
+  path: string;
+  referrer?: string;
+  session_id?: string;
+  visitor_id?: string;
+  utm?: Record<string, string>;
+}
+
+export async function recordTelemetryEvent(event: TelemetryEventInput): Promise<boolean> {
+  try {
+    const headers: Record<string, string> = { "Content-Type": "application/json" };
+    let url = `${API_BASE_URL}/p/${PROJECT_SLUG}/events`;
+
+    if (API_KEY) {
+      headers["X-API-Key"] = API_KEY;
+      url = `${API_BASE_URL}/api/public/v1/events`;
+    }
+
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 2000);
+
+    const res = await fetch(url, {
+      method: "POST",
+      headers,
+      body: JSON.stringify(event),
+      signal: controller.signal,
+    });
+    clearTimeout(timeout);
+
+    return res.status === 204 || res.ok;
+  } catch {
+    // Fail silently in development/offline
+    return false;
+  }
+}

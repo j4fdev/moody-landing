@@ -9,6 +9,7 @@ import Footer from "@/components/Footer";
 import CrisisModal from "@/components/CrisisModal";
 import LegalModal from "@/components/LegalModal";
 import WaitlistModal from "@/components/WaitlistModal";
+import { trackTelemetry } from "@/lib/telemetry";
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<"features" | "waitlist">("features");
@@ -16,14 +17,21 @@ export default function Home() {
   const [waitlistModalOpen, setWaitlistModalOpen] = useState(false);
   const [legalModalType, setLegalModalType] = useState<"terms" | "privacy" | null>(null);
 
+  // Send page_view telemetry beacon on mount
+  useEffect(() => {
+    trackTelemetry("page_view", window.location.pathname);
+  }, []);
+
   // Sync tab with URL hash if present (#waitlist or #features)
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.toLowerCase();
       if (hash === "#waitlist") {
         setActiveTab("waitlist");
+        trackTelemetry("page_view", "/#waitlist");
       } else if (hash === "#features") {
         setActiveTab("features");
+        trackTelemetry("page_view", "/#features");
       }
     };
 
@@ -35,6 +43,12 @@ export default function Home() {
   const handleTabChange = (tab: "features" | "waitlist") => {
     setActiveTab(tab);
     window.history.replaceState(null, "", `#${tab}`);
+    trackTelemetry("page_view", `/#${tab}`);
+  };
+
+  const handleOpenWaitlist = () => {
+    trackTelemetry("cta_click", "#waitlist-modal");
+    setWaitlistModalOpen(true);
   };
 
   return (
@@ -45,20 +59,20 @@ export default function Home() {
           activeTab={activeTab}
           onTabChange={handleTabChange}
           onOpenCrisis={() => setCrisisOpen(true)}
-          onOpenWaitlistModal={() => setWaitlistModalOpen(true)}
+          onOpenWaitlistModal={handleOpenWaitlist}
         />
 
         {/* Hero Section */}
         <Hero
           activeTab={activeTab}
           onTabChange={handleTabChange}
-          onOpenWaitlistModal={() => setWaitlistModalOpen(true)}
+          onOpenWaitlistModal={handleOpenWaitlist}
         />
 
         {/* Main Interactive Tab Content */}
         <main className="transition-all">
           {activeTab === "features" ? (
-            <TabFeatures onOpenWaitlistModal={() => setWaitlistModalOpen(true)} />
+            <TabFeatures onOpenWaitlistModal={handleOpenWaitlist} />
           ) : (
             <TabWaitlist onOpenLegal={(type) => setLegalModalType(type)} />
           )}
